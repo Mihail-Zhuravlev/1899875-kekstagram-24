@@ -1,3 +1,3 @@
-import { similarPost } from './modules/similar-post.js';
+import {creareMinPictures} from './modules/create-min-pictures.js';
 
-console.log(similarPost);
+creareMinPictures();
