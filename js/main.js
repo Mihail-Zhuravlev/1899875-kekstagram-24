@@ -13,11 +13,6 @@ const comments = [
 ];
 
 const names = ['Артем', 'Андрей', 'Сергей', 'Николай', 'Евгений'];
-
-console.log(getRandomPositiveInteger(0, comments.length - 1));
-
-
-
 const getPost = function() {
   return {
     id: getRandomPositiveInteger(1, 25),
@@ -34,5 +29,4 @@ const getPost = function() {
 };
 
 const similarPost = Array.from({length: 25},  getPost);
-
-console.log(similarPost)
+console.log(similarPost);

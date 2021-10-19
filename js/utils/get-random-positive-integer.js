@@ -27,9 +27,9 @@ function getRandomPositiveInteger (min, max) {
   return Math.floor(result);
 
 }
-let getRandomElement = (array) => {
-  return array[getRandomPositiveInteger(0, array.length - 1)];
-}
+const getRandomElement = (array) => { array[getRandomPositiveInteger(0, array.length - 1)]};
+
+
 
 
 export {getRandomPositiveInteger, getRandomElement};
