@@ -16,6 +16,6 @@ const getPost = function() {
   };
 };
 
-const similarPost = Array.from({length: 25},  getPost);
+const getPosts = (count) =>  Array.from({length: count},  getPost);
 
-export {similarPost};
+export {getPosts};
