@@ -26,10 +26,7 @@ function getRandomPositiveInteger (min, max) {
   // потому что Math.random() генерирует только дробные числа и ноль.
   return Math.floor(result);
 
-}
-const getRandomElement = (array) => { array[getRandomPositiveInteger(0, array.length - 1)]};
-
-
-
+};
+const getRandomElement = (array) =>  array[getRandomPositiveInteger(0, array.length - 1)];
 
 export {getRandomPositiveInteger, getRandomElement};
