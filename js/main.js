@@ -1,3 +1,7 @@
-import { similarPost } from './modules/similar-post.js';
+import {getPosts} from './modules/get-posts.js';
+import {creareMinPictures} from './modules/create-min-pictures.js';
 
-console.log(similarPost);
+
+const COUNT_POSTS = 25;
+const dataPosts = getPosts(COUNT_POSTS);
+creareMinPictures(dataPosts);
