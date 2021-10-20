@@ -6,7 +6,7 @@ const pictures =  document.querySelector('.pictures');
 
 const creareMinPicture = (post) => {
   image.src = post.url;
-  pictureComments.textContent = post.comments;
+  pictureComments.textContent = post.comment.length;
   likesCount.textContent = post.likes;
   const clonePicturies = minPicturesTemlate.cloneNode(true);
   return clonePicturies;
@@ -15,7 +15,12 @@ const creareMinPicture = (post) => {
 const creareMinPictures = (posts) => {
 
   const postsTemplate = document.createDocumentFragment();
-  posts.forEach( (post) => postsTemplate.appendChild(creareMinPicture(post)));
+  console.log(postsTemplate)
+  posts.forEach( (post) => {
+    console.log(post)
+    postsTemplate.appendChild(creareMinPicture(post))
+
+  });
   pictures.appendChild(postsTemplate);
 };
 
