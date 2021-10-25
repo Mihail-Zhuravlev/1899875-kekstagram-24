@@ -1,9 +1,5 @@
-
-import { renderBigPicture } from './create-big-pictures.js'
+import { renderBigPicture } from './create-big-pictures.js';
 const minPicturesTemlate = document.querySelector('#picture').content;
-
-
-
 
 const pictures =  document.querySelector('.pictures');
 
@@ -14,9 +10,9 @@ const creareMinPicture = (post) => {
   const image = clonePicturies.querySelector('.picture__img');
   const link = clonePicturies.querySelector('.picture');
   link.addEventListener('click', (evt) => {
-    evt.preventDefault()
-    renderBigPicture(post)
-  })
+    evt.preventDefault();
+    renderBigPicture(post);
+  });
   image.src = post.url;
   pictureComments.textContent = post.comment.length;
   likesCount.textContent = post.likes;
@@ -26,16 +22,16 @@ const creareMinPicture = (post) => {
 
 
 const creareMinPictures = (posts) => {
-  const elements = []
+
   const postsTemplate = document.createDocumentFragment();
   posts.forEach( (post) => {
-    const picture = creareMinPicture(post)
-    postsTemplate.appendChild(picture)
+    const picture = creareMinPicture(post);
+    postsTemplate.appendChild(picture);
   });
 
   pictures.appendChild(postsTemplate);
 
-  return pictures.querySelectorAll('.picture')
+  return pictures.querySelectorAll('.picture');
 };
 
 export { creareMinPictures };

@@ -6,7 +6,7 @@ import {onClosedBigPictureClick} from './modules/create-big-pictures.js';
 
 const COUNT_POSTS = 19;
 const dataPosts = getPost(COUNT_POSTS);
-const images = creareMinPictures(dataPosts);
+creareMinPictures(dataPosts);
 
 
 onClosedBigPictureClick();

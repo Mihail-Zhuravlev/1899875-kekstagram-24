@@ -25,7 +25,7 @@ function closedBigPicture() {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   socialComments.innerHTML = '';
-  document.removeEventListener('keydown', onCloseEscapeKeydown)
+  document.removeEventListener('keydown', onCloseEscapeKeydown);
 }
 
 function renderBigPicture(picture) {
@@ -47,20 +47,9 @@ function renderBigPicture(picture) {
   socialCommentCount.classList.add('hidden');
   commentsLoader.classList.add('hidden');
   document.body.classList.add('modal-open');
-  console.log('render');
   document.addEventListener('keydown', onCloseEscapeKeydown);
 }
 
-const onOpenBigPictureClick = (pictures, usersPictures) => {
-  for(let index = 0; index < pictures.length; index++ ){
-    const item = pictures[index];
-    item.addEventListener('click', (evt) => {
-      evt.preventDefault();
-      renderBigPicture(usersPictures[index]);
-    });
-
-  }
-};
 
 const onClosedBigPictureClick = () => {
   pictureCancel.addEventListener('click', (evt) => {
