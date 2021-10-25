@@ -1,7 +1,14 @@
-import {getPosts} from './modules/get-posts.js';
+
+import {getPost} from './modules/get-posts.js';
 import {creareMinPictures} from './modules/create-min-pictures.js';
+import {onClosedBigPictureClick} from './modules/create-big-pictures.js';
 
 
-const COUNT_POSTS = 25;
-const dataPosts = getPosts(COUNT_POSTS);
+const COUNT_POSTS = 19;
+const dataPosts = getPost(COUNT_POSTS);
 creareMinPictures(dataPosts);
+
+
+onClosedBigPictureClick();
+
+

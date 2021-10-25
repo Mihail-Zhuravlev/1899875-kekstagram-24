@@ -1,22 +1,39 @@
 import { getRandomPositiveInteger , getRandomElement } from './util.js';
-import { photos, descriptions, comments, names } from './data.js';
+import {  descriptions, comments, names } from './data.js';
 
-const getPost = function() {
+const generateData = (num, functionGenerate) => {
+  const arrayObjects = [];
+
+  for (let index = 1; index <= num; index++) {
+    arrayObjects.push(functionGenerate(index));
+  }
+  return arrayObjects;
+};
+
+
+const getCommets = function() {
   return {
-    id: getRandomPositiveInteger(1, 25),
-    url: `photos/${getRandomElement(photos)}.jpg`,
-    description: getRandomElement(descriptions),
-    likes: getRandomPositiveInteger(15, 200),
-    comments:getRandomPositiveInteger(0,6),
-    comment : {
-      id: getRandomPositiveInteger(15, 200),
-      avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
-      message: getRandomElement(comments),
-      name: getRandomElement(names),
-    },
+    id: getRandomPositiveInteger(15, 200),
+    avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+    message: getRandomElement(comments),
+    name: getRandomElement(names),
   };
 };
 
-const getPosts = (count) =>  Array.from({length: count},  getPost);
+const postObject = [];
+const getPost = function(objCount) {
+  for(let index = 1; index <= objCount; index++) {
+    const necessarySumObjects = getRandomPositiveInteger(1, 5);
+    const randomObj = {
+      id: index,
+      url: `photos/${index}.jpg`,
+      description: getRandomElement(descriptions),
+      likes: getRandomPositiveInteger(15, 200),
+      comment : generateData(necessarySumObjects, getCommets),
+    };
+    postObject.push(randomObj);
+  }
+  return postObject;
+};
 
-export {getPosts};
+export {getPost};
