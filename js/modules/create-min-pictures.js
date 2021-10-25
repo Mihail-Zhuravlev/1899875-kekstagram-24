@@ -6,7 +6,7 @@ const pictures =  document.querySelector('.pictures');
 
 const creareMinPicture = (post) => {
   image.src = post.url;
-  pictureComments.textContent = post.comments;
+  pictureComments.textContent = post.comment.length;
   likesCount.textContent = post.likes;
   const clonePicturies = minPicturesTemlate.cloneNode(true);
   return clonePicturies;

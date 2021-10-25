@@ -1,0 +1,68 @@
+
+const bigPicture = document.querySelector('.big-picture ');
+const bigPictureImg = document.querySelector('.big-picture__img').querySelector('img');
+const likesCount = document.querySelector('.likes-count');
+const commentsCount = document.querySelector('.comments-count');
+const socialComments = document.querySelector('.social__comments');
+const socialCommentTemplate = document.querySelector('#social-comment').content.querySelector('.social__comment');
+let socialCommentFragment = document.createDocumentFragment();
+const socialCaption = document.querySelector('.social__caption');
+const socialCommentCount = document.querySelector('.social__comment-count');
+const commentsLoader = document.querySelector('.comments-loader');
+const pictureCancel = document.querySelector('#picture-cancel');
+
+function closedBigPicture() {
+  bigPicture.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  socialComments.innerHTML = '';
+}
+
+const escapeKey = (evt) => evt.key === 'Escape';
+const onCloseEscapeKeydown = function(evt) {
+  if (escapeKey(evt)) {
+    evt.preventDefault();
+    closedBigPicture();
+  }
+};
+
+function renderBigPicture(picture) {
+
+  bigPicture.classList.remove('hidden');
+  bigPictureImg.src = picture.url;
+  likesCount.textContent = picture.likes;
+  commentsCount.textContent = picture.comment.length;
+
+  picture.comment.forEach((comment) => {
+    socialCommentFragment = socialCommentTemplate.cloneNode(true);
+    socialCommentFragment.querySelector('.social__picture').src = comment.avatar;
+    socialCommentFragment.querySelector('.social__picture').alt = comment.name;
+    socialCommentFragment.querySelector('.social__text').textContent = comment.message;
+    socialComments.appendChild(socialCommentFragment);
+  });
+
+  socialCaption.textContent = picture.description;
+  socialCommentCount.classList.add('hidden');
+  commentsLoader.classList.add('hidden');
+  document.body.classList.add('modal-open');
+  document.addEventListener('keydown', onCloseEscapeKeydown);
+}
+
+const onOpenBigPictureClick = (pictures, usersPictures) => {
+  for(let index = 0; index < pictures.length; index++ ){
+    const item = pictures[index];
+    item.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      renderBigPicture(usersPictures[index]);
+    });
+
+  }
+};
+
+const onClosedBigPictureClick = () => {
+  pictureCancel.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    closedBigPicture();
+  });
+};
+
+export { onClosedBigPictureClick , onOpenBigPictureClick};
