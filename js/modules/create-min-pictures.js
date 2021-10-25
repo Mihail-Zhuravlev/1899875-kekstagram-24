@@ -1,22 +1,41 @@
+
+import { renderBigPicture } from './create-big-pictures.js'
 const minPicturesTemlate = document.querySelector('#picture').content;
-const image = minPicturesTemlate.querySelector('.picture__img');
-const likesCount = minPicturesTemlate.querySelector('.picture__likes');
-const pictureComments = minPicturesTemlate.querySelector('.picture__comments');
+
+
+
+
 const pictures =  document.querySelector('.pictures');
 
 const creareMinPicture = (post) => {
+  const clonePicturies = minPicturesTemlate.cloneNode(true);
+  const pictureComments = clonePicturies.querySelector('.picture__comments');
+  const likesCount = clonePicturies.querySelector('.picture__likes');
+  const image = clonePicturies.querySelector('.picture__img');
+  const link = clonePicturies.querySelector('.picture');
+  link.addEventListener('click', (evt) => {
+    evt.preventDefault()
+    renderBigPicture(post)
+  })
   image.src = post.url;
   pictureComments.textContent = post.comment.length;
   likesCount.textContent = post.likes;
-  const clonePicturies = minPicturesTemlate.cloneNode(true);
+
   return clonePicturies;
 };
 
-const creareMinPictures = (posts) => {
 
+const creareMinPictures = (posts) => {
+  const elements = []
   const postsTemplate = document.createDocumentFragment();
-  posts.forEach( (post) => postsTemplate.appendChild(creareMinPicture(post)));
+  posts.forEach( (post) => {
+    const picture = creareMinPicture(post)
+    postsTemplate.appendChild(picture)
+  });
+
   pictures.appendChild(postsTemplate);
+
+  return pictures.querySelectorAll('.picture')
 };
 
 export { creareMinPictures };

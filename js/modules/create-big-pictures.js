@@ -1,9 +1,9 @@
 
 const bigPicture = document.querySelector('.big-picture ');
-const bigPictureImg = document.querySelector('.big-picture__img').querySelector('img');
-const likesCount = document.querySelector('.likes-count');
-const commentsCount = document.querySelector('.comments-count');
-const socialComments = document.querySelector('.social__comments');
+const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
+const likesCount = bigPicture.querySelector('.likes-count');
+const commentsCount = bigPicture.querySelector('.comments-count');
+const socialComments = bigPicture.querySelector('.social__comments');
 const socialCommentTemplate = document.querySelector('#social-comment').content.querySelector('.social__comment');
 let socialCommentFragment = document.createDocumentFragment();
 const socialCaption = document.querySelector('.social__caption');
@@ -11,11 +11,6 @@ const socialCommentCount = document.querySelector('.social__comment-count');
 const commentsLoader = document.querySelector('.comments-loader');
 const pictureCancel = document.querySelector('#picture-cancel');
 
-function closedBigPicture() {
-  bigPicture.classList.add('hidden');
-  document.body.classList.remove('modal-open');
-  socialComments.innerHTML = '';
-}
 
 const escapeKey = (evt) => evt.key === 'Escape';
 const onCloseEscapeKeydown = function(evt) {
@@ -24,6 +19,14 @@ const onCloseEscapeKeydown = function(evt) {
     closedBigPicture();
   }
 };
+
+
+function closedBigPicture() {
+  bigPicture.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  socialComments.innerHTML = '';
+  document.removeEventListener('keydown', onCloseEscapeKeydown)
+}
 
 function renderBigPicture(picture) {
 
@@ -44,6 +47,7 @@ function renderBigPicture(picture) {
   socialCommentCount.classList.add('hidden');
   commentsLoader.classList.add('hidden');
   document.body.classList.add('modal-open');
+  console.log('render');
   document.addEventListener('keydown', onCloseEscapeKeydown);
 }
 
@@ -65,4 +69,4 @@ const onClosedBigPictureClick = () => {
   });
 };
 
-export { onClosedBigPictureClick , onOpenBigPictureClick};
+export { onClosedBigPictureClick, renderBigPicture};
