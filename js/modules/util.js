@@ -29,8 +29,8 @@ function getRandomPositiveInteger (min, max) {
 }
 const getRandomElement = (array) =>  array[getRandomPositiveInteger(0, array.length - 1)];
 
-function checkStringLength (string, length) {
-  return string.length <= length;
-}
+// function checkStringLength (string, length) {
+//   return string.length <= length;
+// }
 
 export {getRandomPositiveInteger, getRandomElement};
