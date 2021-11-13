@@ -9,7 +9,9 @@ const socialCaption = document.querySelector('.social__caption');
 const socialCommentCount = document.querySelector('.social__comment-count');
 const commentsLoader = document.querySelector('.comments-loader');
 const pictureCancel = document.querySelector('#picture-cancel');
+
 const body = document.querySelector('body');
+
 
 
 const escapeKey = (evt) => evt.key === 'Escape';
@@ -19,6 +21,7 @@ const onCloseEscapeKeydown = function(evt) {
     closedBigPicture();
   }
 };
+
 const closedBigPicture = () => {
   bigPicture.classList.add('hidden');
   body.classList.remove('modal-open');
@@ -31,6 +34,7 @@ const onClosedBigPictureClick = () => {
     closedBigPicture();
   });
 };
+
 function renderBigPicture(picture) {
 
   bigPicture.classList.remove('hidden');
@@ -54,3 +58,4 @@ function renderBigPicture(picture) {
 }
 
 export { onClosedBigPictureClick, renderBigPicture, escapeKey, body};
+

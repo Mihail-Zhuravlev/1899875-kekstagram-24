@@ -8,3 +8,4 @@ const dataPosts = getPost(COUNT_POSTS);
 creareMinPictures(dataPosts);
 onClosedBigPictureClick();
 setImgFormSubmit();
+
