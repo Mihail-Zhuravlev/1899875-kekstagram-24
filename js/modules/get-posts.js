@@ -23,7 +23,7 @@ const getCommets = function() {
 const postObject = [];
 const getPost = function(objCount) {
   for(let index = 1; index <= objCount; index++) {
-    const necessarySumObjects = getRandomPositiveInteger(1, 5);
+    const necessarySumObjects = getRandomPositiveInteger(1, 30);
     const randomObj = {
       id: index,
       url: `photos/${index}.jpg`,
