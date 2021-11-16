@@ -1,4 +1,4 @@
-import { renderBigPicture } from './create-big-pictures.js';
+import { renderBigPicture, commentLoaded,  showComments} from './create-big-pictures.js';
 const minPicturesTemlate = document.querySelector('#picture').content;
 
 const pictures =  document.querySelector('.pictures');
@@ -12,6 +12,7 @@ const creareMinPicture = (post) => {
   link.addEventListener('click', (evt) => {
     evt.preventDefault();
     renderBigPicture(post);
+    commentLoaded.addEventListener('click', showComments);
   });
   image.src = post.url;
   pictureComments.textContent = post.comment.length;
