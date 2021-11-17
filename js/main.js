@@ -1,12 +1,16 @@
-import {getPost} from './modules/get-posts.js';
-import {creareMinPictures} from './modules/create-min-pictures.js';
-import {onClosedBigPictureClick} from './modules/create-big-pictures.js';
-import {setImgFormSubmit} from './modules/validation.js';
-import './modules/photo-upload.js';
-import './modules/scale-img.js';
-const COUNT_POSTS = 19;
-const dataPosts = getPost(COUNT_POSTS);
-creareMinPictures(dataPosts);
-onClosedBigPictureClick();
-setImgFormSubmit();
+import {generatePhotos, addFilters} from './thumbnail-render.js';
+import {setImageFormSubmit, closeUploadedImage} from './form.js';
+import {getData} from './api.js';
+import {showLoadAlert} from './alert-message.js';
+import {debounce} from './utils.js';
+import './avatar.js';
 
+getData(
+  (photos) => {
+    generatePhotos(photos);
+    addFilters(photos, debounce(generatePhotos));
+  },
+  () => showLoadAlert('Проблемы с загрузкой контента, попробуйте обновить страницу'),
+);
+
+setImageFormSubmit(closeUploadedImage);
