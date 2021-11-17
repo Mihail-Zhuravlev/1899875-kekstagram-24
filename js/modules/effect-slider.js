@@ -9,36 +9,36 @@ const imageOptions = {
     style: 'none',
     min: 0,
     max: 1,
-    step: 0.01
-    },
+    step: 0.01,
+  },
   'chrome': {
     style: 'grayscale',
     min: 0,
     max: 1,
-    step: 0.01
-      },
+    step: 0.01,
+  },
   'sepia': { style: 'sepia',
     min: 0,
     max: 1,
-    step: 0.01
-    },
+    step: 0.01,
+  },
   'marvin': {
     style: 'invert',
     min: 0,
     max: 100,
-    step: 1
-    },
+    step: 1,
+  },
   'phobos': {
     style: 'blur',
     min: 0,
     max: 3,
-    step: 0.03
+    step: 0.03,
   },
   'heat': {
     style: 'brightness',
     min: 1,
     max: 3,
-    step: 0.03
+    step: 0.03,
   },
 };
 let imageFilter = 'none';
@@ -81,7 +81,7 @@ effectSlider.noUiSlider.on('update', (___, handle, values) => {
     imagePreview.style.filter = `${photoFilter}(${values[handle]})`;
     return;
   }
- if (imageFilter === 'marvin') {
+  if (imageFilter === 'marvin') {
     imagePreview.style.filter = `${photoFilter}(${values[handle]}%)`;
     return;
   }
@@ -89,8 +89,8 @@ effectSlider.noUiSlider.on('update', (___, handle, values) => {
     imagePreview.style.filter = `${photoFilter}(${values[handle]}px)`;
     return;
   }
-    imagePreview.style.filter = '';
-    effectLevel.value = '';
+  imagePreview.style.filter = '';
+  effectLevel.value = '';
 });
 
 effectList.addEventListener('change', (evt) => {
@@ -108,4 +108,4 @@ const setDefaultFilter = () => {
   });
 };
 
-export {setDefaultFilter}
+export {setDefaultFilter};

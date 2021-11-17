@@ -1,8 +1,8 @@
 import  {escapeKey, body} from './create-big-pictures.js';
 import {textArea, hashtagsInput} from './validation.js';
-import { setDefaultScale } from './scale-img.js'
-import {setDefaultFilter} from './effect-slider.js'
-import {getLoadingFile} from './loading-file.js'
+import { setDefaultScale } from './scale-img.js';
+import {setDefaultFilter} from './effect-slider.js';
+import {getLoadingFile} from './loading-file.js';
 
 
 const imgCploadCancel = document.querySelector('.img-upload__cancel');
@@ -46,4 +46,4 @@ imgCploadCancel.addEventListener('click', () => {
   uploadFile.value = '';
 });
 
-export {uploadFile}
+export {uploadFile};

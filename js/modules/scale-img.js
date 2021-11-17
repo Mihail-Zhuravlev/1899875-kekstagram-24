@@ -29,7 +29,7 @@ const enlargeScale = () => {
   }
 };
 
-scaleButtons.forEach(scaleButton => {
+scaleButtons.forEach((scaleButton) => {
   scaleButton.addEventListener('click', () => {
     if(scaleButton.classList.contains('scale__control--smaller')) {
       reduceScale();
