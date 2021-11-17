@@ -1,5 +1,9 @@
 import  {escapeKey, body} from './create-big-pictures.js';
 import {textArea, hashtagsInput} from './validation.js';
+import { setDefaultScale } from './scale-img.js';
+import {setDefaultFilter} from './effect-slider.js';
+import {getLoadingFile} from './loading-file.js';
+
 
 const imgCploadCancel = document.querySelector('.img-upload__cancel');
 const uploadFile = document.querySelector('#upload-file');
@@ -12,6 +16,11 @@ hashtagsInput.addEventListener('blur', () => hashtagsInput.classList.remove('tex
 uploadFile.addEventListener('change', () => {
   body.classList.add('modal-open');
   imgUploadOverlay.classList.remove('hidden');
+  setDefaultScale();
+  setDefaultFilter();
+  getLoadingFile(uploadFile);
+
+
 });
 
 const onCloseImageEscKeydown = (evt) => {
@@ -36,3 +45,5 @@ imgCploadCancel.addEventListener('click', () => {
   imgUploadOverlay.classList.add('hidden');
   uploadFile.value = '';
 });
+
+export {uploadFile};
