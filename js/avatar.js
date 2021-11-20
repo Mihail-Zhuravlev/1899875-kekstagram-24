@@ -12,9 +12,8 @@ fileChooser.addEventListener('change', () => {
 
   if (matches) {
     preview.src = URL.createObjectURL(file);
-    minPreviews.forEach((previewItem => {
-      previewItem.style.backgroundImage = `url('${URL.createObjectURL(file)}')`
-    }))
-
+    minPreviews.forEach((previewItem) => {
+      previewItem.style.backgroundImage = `url('${URL.createObjectURL(file)}')`;
+    });
   }
 });

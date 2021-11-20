@@ -1,5 +1,5 @@
 import {isEscapeKey} from './utils.js';
-import {setDefaultFilter} from './slider.js'
+import {setDefaultFilter} from './slider.js';
 const MESSAGE_SHOW_TIME = 5000;
 
 const showLoadAlert = (message) => {
@@ -47,7 +47,7 @@ const closeMessageModal = () => {
 
   document.removeEventListener('click', onDocumentEvent);
   document.removeEventListener('keydown', onMessageEscKeydown);
-}
+};
 
 const renderSuccessMessage = () => {
   const messageModal = successTemplate.cloneNode(true);

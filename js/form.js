@@ -43,7 +43,7 @@ const onHashtagInput = () => {
   }
 
   hashtagInput.reportValidity();
-}
+};
 
 const onDescriptionInput = () => {
   const description = descriptionInput.value;
@@ -94,7 +94,7 @@ const closeUploadedImage = () => {
   hashtagInput.removeEventListener('input', onHashtagInput);
   descriptionInput.removeEventListener('input', onDescriptionInput);
   document.removeEventListener('keydown', onPhotoEscKeydown);
-}
+};
 
 photoUploadForm.addEventListener('change', () => {
   openUploadedImage();

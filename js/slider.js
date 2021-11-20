@@ -66,7 +66,7 @@ effectList.addEventListener('change', (evt) => {
 });
 
 const setDefaultFilter = () => {
- const defaultChecked = document.getElementById('effect-none');
+  const defaultChecked = document.getElementById('effect-none');
   defaultChecked.checked = true;
   imagePreview.style.filter = '';
   imagePreview.className = '';
