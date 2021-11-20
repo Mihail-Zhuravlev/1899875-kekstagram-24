@@ -71,7 +71,7 @@ const openBigPicture = (evt, picture) => {
   bigPictureCloseButton.addEventListener('click', closeBigPicture);
 };
 
-function closeBigPicture() {
+const closeBigPicture = () => {
   bigPicture.classList.add('hidden');
   removeBodyModalOpen();
   clearComments();

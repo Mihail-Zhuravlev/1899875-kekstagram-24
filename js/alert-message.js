@@ -1,4 +1,5 @@
 import {isEscapeKey} from './utils.js';
+import {setDefaultFilter} from './slider.js'
 const MESSAGE_SHOW_TIME = 5000;
 
 const showLoadAlert = (message) => {
@@ -38,7 +39,7 @@ const onDocumentEvent = (evt) => {
   }
 };
 
-function closeMessageModal () {
+const closeMessageModal = () => {
   const messageModal = document.querySelector('.success') || document.querySelector('.error');
   if (messageModal) {
     messageModal.remove();
@@ -56,8 +57,9 @@ const renderSuccessMessage = () => {
   messageModalButton.addEventListener('click', () => {
     closeMessageModal();
   });
+  setDefaultFilter();
   document.addEventListener('click', onDocumentEvent);
-  document.addEventListener('keydown', onDocumentEvent);
+  document.addEventListener('keydown', onMessageEscKeydown);
 };
 
 const renderErrorMessage = () => {
@@ -68,8 +70,9 @@ const renderErrorMessage = () => {
   messageModalButton.addEventListener('click', () => {
     closeMessageModal();
   });
+  setDefaultFilter();
   document.addEventListener('click', onDocumentEvent);
-  document.addEventListener('keydown', onDocumentEvent);
+  document.addEventListener('keydown', onMessageEscKeydown);
 };
 
 export {showLoadAlert, renderSuccessMessage, renderErrorMessage};

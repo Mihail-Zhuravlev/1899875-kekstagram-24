@@ -1,17 +1,16 @@
 import {imagePreview} from './scale.js';
 
 const slider = document.querySelector('.effect-level__slider');
-const effectButtons = document.querySelectorAll('.effects__radio');
 const effectList = document.querySelector('.effects__list');
 const effectLevel = document.querySelector('.effect-level__value');
 
 const photoFilterOptions = {
   'none': { style: 'none', min: 0, max: 1, step: 1 },
-  'chrome': { style: 'grayscale', min: 0, max: 1, step: 0.1 },
-  'sepia': { style: 'sepia', min: 0, max: 1, step: 0.1 },
+  'chrome': { style: 'grayscale', min: 0, max: 1, step: 0.01 },
+  'sepia': { style: 'sepia', min: 0, max: 1, step: 0.01 },
   'marvin': { style: 'invert', min: 0, max: 100, step: 1 },
-  'phobos': { style: 'blur', min: 0, max: 3, step: 0.1 },
-  'heat': { style: 'brightness', min: 1, max: 3, step: 0.1 },
+  'phobos': { style: 'blur', min: 0, max: 3, step: 0.03 },
+  'heat': { style: 'brightness', min: 1, max: 3, step: 0.03 },
 };
 
 let imageFilter = 'none';
@@ -67,15 +66,11 @@ effectList.addEventListener('change', (evt) => {
 });
 
 const setDefaultFilter = () => {
-  effectButtons.forEach((button) => {
-    if (button.id === 'effect-none') {
-      button.setAttribute('checked', 'checked');
-    }
-
-    slider.style.display = 'none';
-    imagePreview.className = '';
-    imagePreview.style = '';
-  });
+ const defaultChecked = document.getElementById('effect-none');
+  defaultChecked.checked = true;
+  imagePreview.style.filter = '';
+  imagePreview.className = '';
+  slider.style.display = 'none';
 };
 
 export {setDefaultFilter};

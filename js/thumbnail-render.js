@@ -38,19 +38,12 @@ const addFilters = (data, render) => {
   imageFilterForm.addEventListener('click', (evt) => {
     imageFilterButtons.forEach((button) => button.classList.remove('img-filters__button--active'));
     let newData = data;
-
     if (evt.target.id === 'filter-random') {
       newData = getRandomPictures(newData, RANDOM_PICTURE_COUNT);
     }
-
     if (evt.target.id === 'filter-discussed') {
       newData = sortPictures(newData, 'comments');
     }
-
-    if (evt.target.id === 'filter-default') {
-      newData = data;
-    }
-
     evt.target.classList.add('img-filters__button--active');
     render(newData);
   });
