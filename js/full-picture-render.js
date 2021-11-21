@@ -27,7 +27,7 @@ const getComments = (comment) => {
   commentsContainer.append(bigPictureCommentFragment);
 };
 
-const showComments = () => {
+const onCommentsLoader = () => {
   const hiddenComments = commentsContainer.querySelectorAll('.social__comment.hidden');
   Array.from(hiddenComments).slice(0, MAX_ADDIBLE_COMMENTS).forEach((comment) => comment.classList.remove('hidden'));
   const allCommnets = commentsContainer.querySelectorAll('.social__comment');
@@ -51,13 +51,13 @@ const renderBigPicture = (picture) => {
   bigPictureDescription.textContent = `${picture.description}`;
 
   picture.comments.forEach(getComments);
-  showComments();
+  onCommentsLoader();
 };
 
 const onPictureEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeBigPicture();
+    onBigPictureCloseButton();
   }
 };
 
@@ -67,19 +67,19 @@ const openBigPicture = (evt, picture) => {
 
   document.addEventListener('keydown', onPictureEscKeydown);
 
-  commentsLoader.addEventListener('click', showComments);
-  bigPictureCloseButton.addEventListener('click', closeBigPicture);
+  commentsLoader.addEventListener('click', onCommentsLoader);
+  bigPictureCloseButton.addEventListener('click', onBigPictureCloseButton);
 };
 
-const closeBigPicture = () => {
+const onBigPictureCloseButton = () => {
   bigPicture.classList.add('hidden');
   removeBodyModalOpen();
   clearComments();
 
   document.removeEventListener('keydown', onPictureEscKeydown);
 
-  commentsLoader.removeEventListener('click', showComments);
-  bigPictureCloseButton.removeEventListener('click', closeBigPicture);
+  commentsLoader.removeEventListener('click', onCommentsLoader);
+  bigPictureCloseButton.removeEventListener('click', onBigPictureCloseButton);
 };
 
 export {renderBigPicture, openBigPicture};

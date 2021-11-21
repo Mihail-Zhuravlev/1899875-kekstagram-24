@@ -6,8 +6,8 @@ import {renderSuccessMessage, renderErrorMessage} from './alert-message.js';
 
 const MAX_HASHTAGS_NUMBER = 5;
 const MAX_COMMENT_LENGTH = 140;
-const HASHTAG_REGEX = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
-const hashtagLength = 20;
+const HASHTAG_REGEX = /[~`!@_()$%^&*+=\-[\]\\';,./{}|\\":<>?]/g;
+const MAX_LENGTH_HASHTAGS = 20;
 const imageForm = document.querySelector('#upload-select-image');
 const photoUploadOverlay = imageForm.querySelector('.img-upload__overlay');
 const photoUploadForm = imageForm.querySelector('#upload-file');
@@ -15,34 +15,51 @@ const photoUploadFormClose = imageForm.querySelector('#upload-cancel');
 const hashtagInput = imageForm.querySelector('.text__hashtags');
 const descriptionInput = imageForm.querySelector('.text__description');
 
+const checkDuplicates = (array) => (new Set(array)).size !== array.length;
 const onHashtagInput = () => {
-  const hashtagsStrings = hashtagInput.value;
-  const hashtags = hashtagsStrings.trim().split(' ');
-  hashtagInput.setCustomValidity('');
-  if (hashtags.length > MAX_HASHTAGS_NUMBER) {
-    hashtagInput.setCustomValidity('Нельзя указать больше пяти хэш-тегов');
-  }
-  hashtags.forEach((hashtag) => {
-    if(hashtag.startsWith('#') && hashtag.length === 1) {
-      return hashtagInput.setCustomValidity('хеш-тег не может состоять только из одной решётки');
+  hashtagInput.value = hashtagInput.value.replace(/\s+/g, ' ');
+  const hashArray = hashtagInput.value.toLowerCase().split(' ');
+  let error = '';
+
+  hashArray.forEach((hash) => {
+    if (!hash.startsWith('#')) {
+      error = 'хеш-тег должен начинаться с решётки #';
     }
-    if(hashtag.length > hashtagLength) {
-      return hashtagInput.setCustomValidity('максимальная длина одного хэш-тега 20 символов, включая решётку');
+
+    if (hash === '#') {
+      error = 'хеш-тег не может состоять только из одной решётки';
     }
-    if(!hashtag.startsWith('#') && hashtag.length > 0) {
-      return hashtagInput.setCustomValidity('хэш-тег начинается с символа # (решётка)');
+
+    if (HASHTAG_REGEX.test(hash)) {
+      error = 'хештег не может содержать пробелы, спецсимволы (@, $ и т. п.)';
     }
-    if(!HASHTAG_REGEX.test(hashtag)) {
-      return hashtagInput.setCustomValidity('строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.');
+
+    if (hash.length > MAX_LENGTH_HASHTAGS) {
+      error = `В хештеге не может быть больше ${MAX_LENGTH_HASHTAGS} символов`;
+    }
+
+    if (checkDuplicates(hashArray)) {
+      error = 'хеш-теги не могут повторяться';
+    }
+
+    if (hashArray.length > MAX_HASHTAGS_NUMBER) {
+      error = `не больше ${MAX_HASHTAGS_NUMBER} тегов`;
     }
   });
 
-  const uniqTags = new Set(hashtags.map((hashtag) => hashtag.toLowerCase()));
-  if(uniqTags.size !== hashtags.length) {
-    hashtagInput.setCustomValidity('один и тот же хэш-тег не может быть использован дважды');
+  if (!error) {
+    hashtagInput.setCustomValidity('');
+    hashtagInput.classList.remove('text__hashtags--error');
+  } else if (hashArray[0] === '') {
+    hashtagInput.setCustomValidity('');
+    hashtagInput.classList.remove('text__hashtags--error');
+    hashtagInput.value = hashtagInput.value.trim();
+  } else {
+    hashtagInput.setCustomValidity(error);
+    hashtagInput.classList.add('text__hashtags--error');
   }
-
   hashtagInput.reportValidity();
+
 };
 
 const onDescriptionInput = () => {
@@ -68,9 +85,7 @@ const openUploadedImage = () => {
   photoUploadOverlay.classList.remove('hidden');
   addBodyModalOpen();
 
-  photoUploadFormClose.addEventListener('click', () => {
-    closeUploadedImage();
-  });
+  photoUploadFormClose.addEventListener('click', closeUploadedImage);
 
   setDefaultScale();
   setDefaultFilter();
@@ -86,14 +101,10 @@ const closeUploadedImage = () => {
   photoUploadForm.value = '';
   hashtagInput.value = '';
   descriptionInput.value = '';
-
-  photoUploadFormClose.removeEventListener('click', () => {
-    closeUploadedImage();
-  });
-
   hashtagInput.removeEventListener('input', onHashtagInput);
   descriptionInput.removeEventListener('input', onDescriptionInput);
   document.removeEventListener('keydown', onPhotoEscKeydown);
+  photoUploadFormClose.removeEventListener('click', closeUploadedImage);
 };
 
 photoUploadForm.addEventListener('change', () => {
