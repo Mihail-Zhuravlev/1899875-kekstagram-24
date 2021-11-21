@@ -80,6 +80,6 @@ const closeBigPicture = () => {
 
   commentsLoader.removeEventListener('click', showComments);
   bigPictureCloseButton.removeEventListener('click', closeBigPicture);
-}
+};
 
 export {renderBigPicture, openBigPicture};
